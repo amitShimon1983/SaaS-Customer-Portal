@@ -27,6 +27,7 @@ const httpTrigger: AzureFunction = async function (
     } catch (error: any) {
       const errorMessage: ErrorResponse = {
         error: "Something want wrong please try again later",
+        serverError: error.message,
       };
       context.res = {
         status: 500,

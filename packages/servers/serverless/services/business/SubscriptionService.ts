@@ -92,7 +92,7 @@ export class SubscriptionService
     const response: IUser[] = await this._userRepository.find<IUser>({
       subscriptionId: subscriptionId,
     });
-    return response?.length;
+    return response?.length || 0;
   }
 
   async getValidSubscriptions(tenantId: string): Promise<ISubscription[]> {
