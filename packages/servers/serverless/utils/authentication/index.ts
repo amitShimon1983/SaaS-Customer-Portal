@@ -40,21 +40,30 @@ export class AuthenticationProvider {
           keys,
           tokenHeader
         );
-        const isTokenValid = AuthenticationProvider.validateToken(
-          matchKey.x5c[0],
-          token
-        );
-        if (!isTokenValid) {
+        if (matchKey && matchKey?.x5c?.[0]) {
+          const isTokenValid = AuthenticationProvider.validateToken(
+            matchKey.x5c[0],
+            token
+          );
+          if (!isTokenValid) {
+            return {
+              status: 403,
+              isAuthenticate: false,
+              message: "User need to authenticate",
+            } as AuthenticationResult;
+          }
           return {
-            status: 403,
-            isAuthenticate: false,
-            message: "User need to authenticate",
+            status: 200,
+            isAuthenticate: true,
+            message: "Success",
           } as AuthenticationResult;
         }
         return {
-          status: 200,
-          isAuthenticate: true,
-          message: "Success",
+          status: 500,
+          isAuthenticate: false,
+          message: `keys: ${JSON.stringify(keys)}, match key ${
+            matchKey ? JSON.stringify(matchKey) : ""
+          }`,
         } as AuthenticationResult;
       }
     }
