@@ -24,7 +24,7 @@ class API {
     };
     const referrerPolicy = 'origin';
 
-    if (token) headers.Authorization = `Bearer ${token}`;
+    if (token) headers.Portal = `Bearer ${token}`;
 
     try {
       const response = await global.fetch(`${this.url}${path}`, {

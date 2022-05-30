@@ -19,7 +19,7 @@ export class AuthenticationProvider {
   static async validateRequest(
     headers: HttpRequestHeaders
   ): Promise<AuthenticationResult> {
-    const tokenReqHeader = headers?.authorization;
+    const tokenReqHeader = headers?.Portal || headers?.portal;
     if (!tokenReqHeader) {
       return {
         status: 401,
