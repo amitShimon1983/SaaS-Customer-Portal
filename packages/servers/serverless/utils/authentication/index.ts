@@ -75,15 +75,6 @@ export class AuthenticationProvider {
             headers?.portal
           } token ${token}`,
         } as AuthenticationResult;
-        // return {
-        //   status: 500,
-        //   isAuthenticate: false,
-        //   message: `keys: ${JSON.stringify(keys)}, match key ${
-        //     matchKey ? JSON.stringify(matchKey) : ""
-        //   } tokenHeader ${JSON.stringify(
-        //     tokenHeader
-        //   )}, tokenHeaderString ${tokenHeaderString} tokenHeaderBase64 ${tokenHeaderBase64} tokenReqHeader ${tokenReqHeader} token ${token}`,
-        // } as AuthenticationResult;
       }
     }
   }
