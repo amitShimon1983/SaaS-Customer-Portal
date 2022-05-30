@@ -32,8 +32,12 @@ export class AuthenticationProvider {
     const {
       tokenHeader,
       tokenHeaderString,
-    }: { tokenHeader: TokenHeader; tokenHeaderString: string } =
-      AuthenticationProvider.extractTokenHeader(token);
+      tokenHeaderBase64,
+    }: {
+      tokenHeader: TokenHeader;
+      tokenHeaderString: string;
+      tokenHeaderBase64: string;
+    } = AuthenticationProvider.extractTokenHeader(token);
     const { jwks_uri }: { jwks_uri: string } =
       await AuthenticationProvider.getJwksUri();
     if (jwks_uri) {
@@ -69,7 +73,7 @@ export class AuthenticationProvider {
             matchKey ? JSON.stringify(matchKey) : ""
           } tokenHeader ${JSON.stringify(
             tokenHeader
-          )}, tokenHeaderString ${tokenHeaderString}`,
+          )}, tokenHeaderString ${tokenHeaderString} tokenHeaderBase64 ${tokenHeaderBase64}`,
         } as AuthenticationResult;
       }
     }
@@ -99,12 +103,13 @@ export class AuthenticationProvider {
   private static extractTokenHeader(token: string): {
     tokenHeader: TokenHeader;
     tokenHeaderString: string;
+    tokenHeaderBase64: string;
   } {
     const tokenHeaderBase64 = token.split(".")[0];
-    var buf = Buffer.from(tokenHeaderBase64, "base64");
+    const buf = Buffer.from(tokenHeaderBase64, "base64");
     const tokenHeaderString = buf.toString("ascii");
     const tokenHeader: TokenHeader = JSON.parse(tokenHeaderString);
-    return { tokenHeader, tokenHeaderString };
+    return { tokenHeader, tokenHeaderString, tokenHeaderBase64 };
   }
 
   async acquireAppAuthenticationToken(): Promise<IAuthenticateResponse> {
