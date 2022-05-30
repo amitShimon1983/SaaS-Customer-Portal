@@ -20,23 +20,23 @@ export class AuthenticationProvider {
     headers: HttpRequestHeaders
   ): Promise<AuthenticationResult> {
     const tokenReqHeader = headers?.portal;
-    // if (!tokenReqHeader) {
-    //   return {
-    //     status: 401,
-    //     isAuthenticate: false,
-    //     message: "User need to authenticate",
-    //   } as AuthenticationResult;
-    // }
-    // const token: string = tokenReqHeader?.replace("Bearer ", "");
-    // const {
-    //   tokenHeader,
-    //   tokenHeaderString,
-    //   tokenHeaderBase64,
-    // }: {
-    //   tokenHeader: TokenHeader;
-    //   tokenHeaderString: string;
-    //   tokenHeaderBase64: string;
-    // } = AuthenticationProvider.extractTokenHeader(token);
+    if (!tokenReqHeader) {
+      return {
+        status: 401,
+        isAuthenticate: false,
+        message: "User need to authenticate",
+      } as AuthenticationResult;
+    }
+    const token: string = tokenReqHeader?.replace("Bearer ", "");
+    const {
+      tokenHeader,
+      tokenHeaderString,
+      tokenHeaderBase64,
+    }: {
+      tokenHeader: TokenHeader;
+      tokenHeaderString: string;
+      tokenHeaderBase64: string;
+    } = AuthenticationProvider.extractTokenHeader(token);
     // const { jwks_uri }: { jwks_uri: string } =
     //   await AuthenticationProvider.getJwksUri();
     // if (jwks_uri) {
@@ -65,12 +65,15 @@ export class AuthenticationProvider {
     //         message: "Success",
     //       } as AuthenticationResult;
     //     }
+
     return {
       status: 500,
       isAuthenticate: false,
-      message: `headers?.portal: ${headers?.portal} token ${JSON.stringify(
-        headers
-      )}`,
+      message: `tokenHeader ${JSON.stringify(
+        tokenHeader
+      )}, tokenHeaderString ${tokenHeaderString} tokenHeaderBase64 ${tokenHeaderBase64} tokenReqHeader ${tokenReqHeader} headers?.portal: ${
+        headers?.portal
+      } token ${token}`,
     } as AuthenticationResult;
     // return {
     //   status: 500,
