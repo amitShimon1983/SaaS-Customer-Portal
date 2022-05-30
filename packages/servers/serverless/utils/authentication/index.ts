@@ -66,26 +66,26 @@ export class AuthenticationProvider {
           } as AuthenticationResult;
         }
 
-    return {
-      status: 500,
-      isAuthenticate: false,
-      message: `tokenHeader ${JSON.stringify(
-        tokenHeader
-      )}, tokenHeaderString ${tokenHeaderString} tokenHeaderBase64 ${tokenHeaderBase64} tokenReqHeader ${tokenReqHeader} headers?.portal: ${
-        headers?.portal
-      } token ${token}`,
-    } as AuthenticationResult;
-    // return {
-    //   status: 500,
-    //   isAuthenticate: false,
-    //   message: `keys: ${JSON.stringify(keys)}, match key ${
-    //     matchKey ? JSON.stringify(matchKey) : ""
-    //   } tokenHeader ${JSON.stringify(
-    //     tokenHeader
-    //   )}, tokenHeaderString ${tokenHeaderString} tokenHeaderBase64 ${tokenHeaderBase64} tokenReqHeader ${tokenReqHeader} token ${token}`,
-    // } as AuthenticationResult;
-    //   }
-    // }
+        return {
+          status: 500,
+          isAuthenticate: false,
+          message: `tokenHeader ${JSON.stringify(
+            tokenHeader
+          )}, tokenHeaderString ${tokenHeaderString} tokenHeaderBase64 ${tokenHeaderBase64} tokenReqHeader ${tokenReqHeader} headers?.portal: ${
+            headers?.portal
+          } token ${token}`,
+        } as AuthenticationResult;
+        // return {
+        //   status: 500,
+        //   isAuthenticate: false,
+        //   message: `keys: ${JSON.stringify(keys)}, match key ${
+        //     matchKey ? JSON.stringify(matchKey) : ""
+        //   } tokenHeader ${JSON.stringify(
+        //     tokenHeader
+        //   )}, tokenHeaderString ${tokenHeaderString} tokenHeaderBase64 ${tokenHeaderBase64} tokenReqHeader ${tokenReqHeader} token ${token}`,
+        // } as AuthenticationResult;
+      }
+    }
   }
   private static getMatchKey(keys: any, tokenHeader: TokenHeader): OpenIdKey {
     return keys.find(
