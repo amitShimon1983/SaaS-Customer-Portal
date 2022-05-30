@@ -53,7 +53,7 @@ export class SubscriptionApiHelper {
           {
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${access_token}`,
+              Authorization: `Portal ${access_token}`,
             },
             body: JSON.stringify(updateResponse),
           }
@@ -84,7 +84,7 @@ export class SubscriptionApiHelper {
           {
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${access_token}`,
+              Authorization: `Portal ${access_token}`,
               "x-ms-marketplace-token": token,
             },
           }
@@ -117,7 +117,7 @@ export class SubscriptionApiHelper {
     }>(activateUrl.replace("*{subscriptionId}*", subscriptionId), {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${access_token}`,
+        Authorization: `Portal ${access_token}`,
       },
       body,
     });

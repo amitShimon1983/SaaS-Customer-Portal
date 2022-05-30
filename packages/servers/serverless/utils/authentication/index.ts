@@ -27,7 +27,7 @@ export class AuthenticationProvider {
         message: "User need to authenticate",
       } as AuthenticationResult;
     }
-    const token: string = tokenReqHeader?.replace("Bearer ", "");
+    const token: string = tokenReqHeader?.replace("Portal ", "");
     const {
       tokenHeader,
       tokenHeaderString,
