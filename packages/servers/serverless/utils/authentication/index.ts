@@ -37,34 +37,34 @@ export class AuthenticationProvider {
       tokenHeaderString: string;
       tokenHeaderBase64: string;
     } = AuthenticationProvider.extractTokenHeader(token);
-    // const { jwks_uri }: { jwks_uri: string } =
-    //   await AuthenticationProvider.getJwksUri();
-    // if (jwks_uri) {
-    //   const { keys }: { keys: OpenIdKey[] } =
-    //     await AuthenticationProvider.getAzureJwtKeys(jwks_uri);
-    //   if (keys?.length) {
-    //     const matchKey: OpenIdKey = AuthenticationProvider.getMatchKey(
-    //       keys,
-    //       tokenHeader
-    //     );
-    //     if (matchKey && matchKey?.x5c?.[0]) {
-    //       const isTokenValid = AuthenticationProvider.validateToken(
-    //         matchKey.x5c[0],
-    //         token
-    //       );
-    //       if (!isTokenValid) {
-    //         return {
-    //           status: 403,
-    //           isAuthenticate: false,
-    //           message: "User need to authenticate",
-    //         } as AuthenticationResult;
-    //       }
-    //       return {
-    //         status: 200,
-    //         isAuthenticate: true,
-    //         message: "Success",
-    //       } as AuthenticationResult;
-    //     }
+    const { jwks_uri }: { jwks_uri: string } =
+      await AuthenticationProvider.getJwksUri();
+    if (jwks_uri) {
+      const { keys }: { keys: OpenIdKey[] } =
+        await AuthenticationProvider.getAzureJwtKeys(jwks_uri);
+      if (keys?.length) {
+        const matchKey: OpenIdKey = AuthenticationProvider.getMatchKey(
+          keys,
+          tokenHeader
+        );
+        if (matchKey && matchKey?.x5c.length) {
+          const isTokenValid = AuthenticationProvider.validateToken(
+            matchKey.x5c[0],
+            token
+          );
+          if (!isTokenValid) {
+            return {
+              status: 403,
+              isAuthenticate: false,
+              message: "User need to authenticate",
+            } as AuthenticationResult;
+          }
+          return {
+            status: 200,
+            isAuthenticate: true,
+            message: "Success",
+          } as AuthenticationResult;
+        }
 
     return {
       status: 500,
