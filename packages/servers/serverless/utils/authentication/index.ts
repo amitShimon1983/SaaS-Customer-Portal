@@ -63,7 +63,7 @@ export class AuthenticationProvider {
           isAuthenticate: false,
           message: `keys: ${JSON.stringify(keys)}, match key ${
             matchKey ? JSON.stringify(matchKey) : ""
-          }`,
+          } tokenHeader ${tokenHeader}`,
         } as AuthenticationResult;
       }
     }
