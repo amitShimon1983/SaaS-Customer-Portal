@@ -19,7 +19,7 @@ export class AuthenticationProvider {
   static async validateRequest(
     headers: HttpRequestHeaders
   ): Promise<AuthenticationResult> {
-    const tokenReqHeader = headers?.Portal || headers?.portal;
+    const tokenReqHeader = headers?.portal;
     if (!tokenReqHeader) {
       return {
         status: 401,
@@ -27,7 +27,7 @@ export class AuthenticationProvider {
         message: "User need to authenticate",
       } as AuthenticationResult;
     }
-    const token: string = tokenReqHeader?.replace("Portal ", "");
+    const token: string = tokenReqHeader?.replace("Bearer  ", "");
     const {
       tokenHeader,
       tokenHeaderString,
