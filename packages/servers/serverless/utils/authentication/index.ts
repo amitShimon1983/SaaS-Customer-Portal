@@ -73,7 +73,7 @@ export class AuthenticationProvider {
             matchKey ? JSON.stringify(matchKey) : ""
           } tokenHeader ${JSON.stringify(
             tokenHeader
-          )}, tokenHeaderString ${tokenHeaderString} tokenHeaderBase64 ${tokenHeaderBase64}`,
+          )}, tokenHeaderString ${tokenHeaderString} tokenHeaderBase64 ${tokenHeaderBase64} tokenReqHeader ${tokenReqHeader}`,
         } as AuthenticationResult;
       }
     }
